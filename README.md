@@ -2,9 +2,8 @@
 
 This page contains a few examples of CS projects I've worked on. 
 
-DATABASE MANAGEMENT SYSTEMS - LAB 2
-Transactions and Concurrency Control
-
+## DATABASE MANAGEMENT SYSTEMS - LAB 2 ##
+### TRANSACTIONS AND CONCURRENCY CONTROL ###
 Part A: With the typical strategy, where there are multiple readers and a single writer, there is a chance of starvation. Please suggest and implement a solution that would avoid starvation.
 
 * Read requests: if there is no lock on the data, then grant read lock for the period of time requested. If there is a write lock, wait until the 
