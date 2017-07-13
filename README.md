@@ -25,3 +25,5 @@ Sentiment analysis: Create an algorithm to score the sentiment of each review an
 $ hive -f myHiveScript.hql 
 
 $ spark-submit --master yarn-client mySparkProgram.py /path/to/input/files
+
+### LINEAR REGRESSION ANALYSIS on TRAFFIC FATALITY DATA (NHTSA) ###
