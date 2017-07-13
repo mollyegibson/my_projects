@@ -1,6 +1,6 @@
 # README #
 
-This page contains a few examples of CS projects I've worked on. 
+This repository contains a few examples of CS projects I've worked on. 
 
 ### DATABASE MANAGEMENT SYSTEMS - TRANSACTIONS AND CONCURRENCY CONTROL ###
 ###  using SimPy ###
