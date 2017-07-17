@@ -15,4 +15,4 @@ MapReduce implemented in Java, ran on HDFS in Linux VM.
 •	Developed a recommender system in Java with a subset of the Netflix Prize dataset (3,250,000 movie reviews).  Divided the data into user vectors, paired co-occurring movies, and computed similarity with Pearson correlation.  Predicted ratings for users in a testing dataset (100,000 reviews).  Ran on HDFS cluster in Linux VM.
 
 ### LINEAR REGRESSION ANALYSIS on TRAFFIC FATALITY DATA (NHTSA) ###
-•	Ran multiple regressions on different features to determine which were most significant in predicting traffic fatalities.
+Jupyter Notebook •	Ran multiple regressions on different features to determine which were most significant in predicting traffic fatalities.
