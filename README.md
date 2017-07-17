@@ -2,12 +2,12 @@
 
 This repository contains a few examples of CS projects I've worked on. 
 
-### DATABASE MANAGEMENT SYSTEMS - TRANSACTIONS AND CONCURRENCY CONTROL ###
-###  using SimPy ###
+### TRANSACTIONS AND CONCURRENCY CONTROL ###
+###  DATABASE MANAGEMENT SYSTEMS ###
 •	Simulated database transaction reading and writing with SimPy to address two frequently arising failures: starvation and invalid writes.  Generated randomly occurring read and write requests using two-phase locking strategy to avoid starvation.  Implemented timestamp-based concurrency control with 3.5% invalid write transactions.
 
-### CLOUD COMPUTING - NLP: SENTIMENT ANALYSIS ###
-### using Hive, PySpark, HDFS in class Linux VM ###
+###  NLP: SENTIMENT ANALYSIS ###
+### CLOUD COMPUTING ###
 •	Filtered and pre-processed unstructured user review data and put into HIVE tables. Wrote an algorithm using PySpark to score sentiment in each review and predict ground-truth labels.  Ran on HDFS cluster in Linux virtual machine.
 
 ### ITEM-BASED COLLABORATIVE FILTERING RECOMMENDATION SYSTEM ###
