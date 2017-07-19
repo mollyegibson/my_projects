@@ -7,7 +7,7 @@ Final RMSE: 0.9306
 To run the job:
 In the directory where you have the Java files (workspace/netflix_recs/src), first compile the Java classes (in this case, I have 4 different jobs in separate directories).
 
-$ javac -classpath `hadoop classpath` job1/*.java
+$ javac -classpath `hadoop classpath` job0/*.java
 
 $ javac -classpath `hadoop classpath` coOccurrenceMatrix/*.java
 
