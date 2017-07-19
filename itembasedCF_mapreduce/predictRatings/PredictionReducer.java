@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
 
 
 /*
- * Reducer receives, from the testset, (userID, list of {movieID:rating, ....})
+ * Reducer receives, from the training set, (userID, list of {movieID:rating, ....})
  * We also need to feed the similarities in, which we'll do in setup()
  */
 public class PredictionReducer extends Reducer<Text, Text, Text, Text>{
@@ -25,15 +25,15 @@ public class PredictionReducer extends Reducer<Text, Text, Text, Text>{
 	
 	public static Logger LOGGER = Logger.getLogger(PredictRatingsDriver.class);
 	
-	File similarities = new File("/home/training/training_materials/developer/data/part-r-00000");
-	File testset = new File("/home/training/training_materials/developer/data/netflix_subset/TestingRatings.txt");
+	File similarities = new File("sim_output2/part-r-00000");
+	File testset = new File("TestingRatings.txt");
 	
 	private Text K1 = new Text();
 	private Text V2 = new Text();
 	
 	
 	private Map<String, Map<String, Float>> simsMap = new HashMap<String, Map<String, Float>>();
-	private Map<String, List<MovieAndRating>> userRatingsMap = new HashMap<String, List<MovieAndRating>>();
+	private Map<String, List<MovieAndRating>> testingUsersMap = new HashMap<String, List<MovieAndRating>>();
 	
 	
 	@Override
@@ -42,31 +42,39 @@ public class PredictionReducer extends Reducer<Text, Text, Text, Text>{
 	
 		//MovieAndRating mr = null;
 		String usrID = key.toString().trim();
-		List<MovieAndRating> mrList = new ArrayList<MovieAndRating>();
 		
-		for (Text v : values) {
-			String[] tokens = v.toString().trim().split(":");
-			MovieAndRating mr = new MovieAndRating(tokens[0], Float.parseFloat(tokens[1]));
-			mrList.add(mr);
+		if (testingUsersMap.containsKey(usrID)) { // we only care about users that we're testing; otherwise ignore
 			
-		}
-		
-		//
-		for (MovieAndRating m : mrList) {
+			// creating a list of all the user's rated movies so we can use that info to make our prediction
+			List<MovieAndRating> mrList = new ArrayList<MovieAndRating>();
 			
-			float pred = weightedAvg(m.getMovieID() , userRatingsMap.get(usrID));
-			K1.set(key + ":" + m.getMovieID());
-			V2.set(String.format("Rating: %.4f Prediction: %.4f", m.getRating(), pred));
+			for (Text v : values) {
+				String[] tokens = v.toString().trim().split(":");
+				MovieAndRating mr = new MovieAndRating(tokens[0], Float.parseFloat(tokens[1]));
+				mrList.add(mr);
+				
+			}
 			
+			// the loop through all of the movies for which we're predicting and calculate predicted rating w weightedavg function
+			for (MovieAndRating m : testingUsersMap.get(usrID)) {
+				
+				// parameters
+				float pred = weightedAvg(m.getMovieID() , mrList);
+				//K1.set(key + ":" + m.getMovieID());
+				// could set the key as the userID and movieID we're predicting but keeping it simple for the RMSE calculator
+				K1.set("");
+				V2.set(String.format("%.3f,%.3f", m.getRating(), pred));
 
-		}
-	
-		//for (MovieAndRating m : userRatingsMap.get(key.toString()))
+			}
 		
-		context.write(K1, V2);
+			//for (MovieAndRating m : testingUsersMap.get(key.toString()))
+			
+			context.write(K1, V2);	
+		}
+		
 	}
 	
-	// method to weight a particular movie's rating compared to all of the user's ratings
+	// method to predict a movie's rating based on all of the user's ratings and the similarity matrix
 	private float weightedAvg(String movieID, List<MovieAndRating> allRatings) {
 		
 		float weights = 0, total = 0;
@@ -106,7 +114,12 @@ public class PredictionReducer extends Reducer<Text, Text, Text, Text>{
 			total += rsim.similarity;
 		}
 		
-		return weights / total;
+		if (total != 0) { //avoid division by zero
+			return weights / total;
+		}
+		else {
+			return total;
+		}
 		
 	}
 	
@@ -197,15 +210,15 @@ public class PredictionReducer extends Reducer<Text, Text, Text, Text>{
 /*				B.movieID = Btokens[0];
 				B.similarity = Float.parseFloat(Btokens[1]);*/
 				
-				// initially setup a list of all users' movies 'n ratings
+				// initially setup a list of all users' movies 'n ratings from the testset - which we'll be predicting
 				
-				if (userRatingsMap.containsKey(user)) { // if the user is already in our dictionary, append the movieRating to the existing list
-					userRatingsMap.get(user).add(new MovieAndRating(mov, rat));
+				if (testingUsersMap.containsKey(user)) { // if the user is already in our dictionary, append the movieRating to the existing list
+					testingUsersMap.get(user).add(new MovieAndRating(mov, rat));
 				} else {
 					// otherwise create a list and add the user to the dict
 					List<MovieAndRating> movrats = new ArrayList<MovieAndRating>();
 					movrats.add(new MovieAndRating(mov, rat));
-					userRatingsMap.put(user, movrats);
+					testingUsersMap.put(user, movrats);
 				}
 								
 			
