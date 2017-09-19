@@ -16,8 +16,8 @@ Then I used SelectFromModel() to choose the most important features in predictin
 Outcomes: Ultimately, my model was able to predict groupname with 71.15% accuracy based on only four features: year, nationality, target type, and region.
 While this is perhaps not as accurate as we would like, there are a LOT of groups in the GTD and only about 50% of the incidents in the database are labeled. 
 The model was able to achieve 82.56% accuracy in Central America & Caribbean, where 37% of attacks were unknown and there were only 59 labels to choose from.
-It was able to achieve nearly 80% accuracy in Sub-Saharan Africa, which also had only 37% unknown attacks and 120 labels. Central Asia was consistently 
-the region with the worst accuracy; this makes sense because there was not very much data in this area: only 500 total incidents, 89% of which were unlabeled. 
+It was able to achieve nearly 80% accuracy in Sub-Saharan Africa, which also had only 37% unknown attacks and 120 labels. These regions had  10121  incidents and 14987  incidents, respectively.
+Central Asia was consistently the region with the worst accuracy; this makes sense because there was not very much data in this area: only 500 total incidents, 89% of which were unlabeled. 
 
 Weaknesses/potential for improvement: Choosing groups with only 5+ attacks was relatively arbitrary. Might want to change this and see effects on accuracy. 
 It also might be worthwhile to lump all of the groups with < n attacks into an 'Other' group and explore the effects.
