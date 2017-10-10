@@ -2,6 +2,10 @@
 
 This repository contains a few examples of DS projects I've worked on. 
 
+### GLOBAL TERRORISM DATABASE - PREDICTIVE MODELING ###
+Jupyter Notebook
+•	Built Random Forest model that predicts which group is responsible for a reported terrorism incident, using features such as attack type, region, weapons used, etc. 
+
 ### ITEM-BASED COLLABORATIVE FILTERING RECOMMENDATION SYSTEM ###
 MapReduce implemented in Java, ran on HDFS in Linux VM.
 •	Developed a recommender system in Java with a subset of the Netflix Prize dataset (3,250,000 movie reviews).  Divided the data into user vectors, paired co-occurring movies, and computed similarity with Pearson correlation.  Predicted ratings for users in a testing dataset (100,000 reviews).  Achieved RMSE of 0.9306.
