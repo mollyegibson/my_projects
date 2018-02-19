@@ -1,0 +1,19 @@
+{
+  "name": "tia-challenge",
+  "version": "1.0.0",
+  "description": "backend engineer node.js challenge",
+  "main": "testies.js",
+  "dependencies": {
+    "mime": "^2.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Molly Gibson",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mollyegibson/my_projects.git"
+  }
+}
